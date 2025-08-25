@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":3,"file":"reservations.d.ts","sourceRoot":"","sources":["../../src/routes/reservations.ts"],"names":[],"mappings":"AAMA,QAAA,MAAM,MAAM,4CAAmB,CAAC;AAsQhC,eAAe,MAAM,CAAC"}
+=======
+{"version":3,"file":"reservations.d.ts","sourceRoot":"","sources":["../../src/routes/reservations.ts"],"names":[],"mappings":"AAMA,QAAA,MAAM,MAAM,4CAAmB,CAAC;AA+QhC,eAAe,MAAM,CAAC"}
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)

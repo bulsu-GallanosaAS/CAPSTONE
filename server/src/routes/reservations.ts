@@ -26,7 +26,10 @@ interface Reservation {
   created_at: string;
 }
 
+<<<<<<< HEAD
 // Get all reservations
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
 router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: express.Response) => {
   try {
     const reservations = await executeQuery(`
@@ -54,7 +57,10 @@ router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: expres
   }
 });
 
+<<<<<<< HEAD
 // Get reservation by ID
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
 router.get('/:id', authenticateToken, async (req: AuthenticatedRequest, res: express.Response) => {
   try {
     const { id } = req.params;
@@ -91,7 +97,10 @@ router.get('/:id', authenticateToken, async (req: AuthenticatedRequest, res: exp
   }
 });
 
+<<<<<<< HEAD
 // Create new reservation
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
 router.post('/', [
   authenticateToken,
   body('customer_name').isLength({ min: 2 }).withMessage('Customer name is required'),
@@ -126,7 +135,10 @@ router.post('/', [
       notes
     } = req.body;
 
+<<<<<<< HEAD
     // Generate reservation code
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
     const reservation_code = `RES${Date.now()}`;
 
     const result = await executeQuery(`
@@ -157,7 +169,10 @@ router.post('/', [
   }
 });
 
+<<<<<<< HEAD
 // Update reservation status
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
 router.put('/:id/status', [
   authenticateToken,
   body('status').isIn(['pending', 'confirmed', 'in_progress', 'completed', 'cancelled']).withMessage('Invalid status')
@@ -195,6 +210,7 @@ router.put('/:id/status', [
   }
 });
 
+<<<<<<< HEAD
 // Update reservation
 router.put('/:id', [
   authenticateToken,
@@ -209,6 +225,24 @@ router.put('/:id', [
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+=======
+router.put('/:id', [
+  body('customer_name').optional().isLength({ min: 2 }),
+  body('phone').optional().isLength({ min: 10 }).withMessage('Phone number must be at least 10 digits'),
+  body('email').optional().isEmail(),
+  body('table_id').optional().isInt(),
+  body('number_of_guests').optional().isInt({ min: 1 }),
+  body('reservation_date').optional().isISO8601().withMessage('Valid date format required'),
+  body('reservation_time').optional().matches(/^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/).withMessage('Valid time format required (HH:MM or HH:MM:SS)')
+], async (req: AuthenticatedRequest, res: express.Response) => {
+  try {
+    console.log('🔧 DEBUG: Reservation update called with ID:', req.params.id);
+    console.log('🔧 DEBUG: Request body:', JSON.stringify(req.body, null, 2));
+    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log('🔧 DEBUG: Validation errors:', errors.array());
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
       return res.status(400).json({
         success: false,
         message: 'Validation failed',
@@ -219,16 +253,30 @@ router.put('/:id', [
     const { id } = req.params;
     const updates = req.body;
 
+<<<<<<< HEAD
     // Build dynamic update query
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
     const fields = Object.keys(updates);
     const values = Object.values(updates);
     const setClause = fields.map(field => `${field} = ?`).join(', ');
 
+<<<<<<< HEAD
+=======
+    console.log('🔧 DEBUG: Update query:', `UPDATE reservations SET ${setClause}, updated_at = NOW() WHERE id = ?`);
+    console.log('🔧 DEBUG: Values:', [...values, id]);
+
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
     await executeQuery(
       `UPDATE reservations SET ${setClause}, updated_at = NOW() WHERE id = ?`,
       [...values, id]
     );
 
+<<<<<<< HEAD
+=======
+    console.log('🔧 DEBUG: Reservation updated successfully');
+
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
     const response: ApiResponse = {
       success: true,
       message: 'Reservation updated successfully'
@@ -236,7 +284,11 @@ router.put('/:id', [
 
     res.json(response);
   } catch (error) {
+<<<<<<< HEAD
     console.error('Error updating reservation:', error);
+=======
+    console.error('🔧 ERROR: Error updating reservation:', error);
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
     res.status(500).json({
       success: false,
       message: 'Failed to update reservation'
@@ -244,7 +296,10 @@ router.put('/:id', [
   }
 });
 
+<<<<<<< HEAD
 // Delete reservation
+=======
+>>>>>>> 6399053 (Updated code for FINAL-ADMIN branch)
 router.delete('/:id', authenticateToken, async (req: AuthenticatedRequest, res: express.Response) => {
   try {
     const { id } = req.params;
