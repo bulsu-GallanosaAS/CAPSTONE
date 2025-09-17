@@ -1,0 +1,30 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+export default function Nav() {
+  return (
+    <nav>
+      <div className="logo" style={{ display: 'flex', alignItems: 'center' }}>
+        <img src="/logo/websitelogo.png" alt="SISZUM Gyupsal Logo" style={{ height: '60px', width: 'auto', objectFit: 'contain' }} />
+      </div>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li className="has-dropdown">
+          <Link to="/">Menu</Link>
+          <ul className="dropdown">
+            <li><Link to="/featuremenu">Featured Menu Items</Link></li>
+            <li><Link to="/unlimited">Unlimited Menu</Link></li>
+            <li><Link to="/alacarte">Ala Carte Menu</Link></li>
+            <li><Link to="/sidedish">Side Dishes</Link></li>
+          </ul>
+        </li>
+        <li><Link to="/promos">Promos</Link></li>
+        <li><Link to="/feedback">Feedback</Link></li>
+        <li><Link to="/reservation">Reservation</Link></li>
+        <li><Link to="/refilling">Refilling</Link></li>
+      </ul>
+    </nav>
+  )
+}
+
+
