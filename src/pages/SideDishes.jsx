@@ -1,6 +1,9 @@
 import React from 'react'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import image1 from '../assets/side1.jpg'
+import image2 from '../assets/side2.jpg'
+
 
 export default function SideDishes() {
   return (
@@ -17,7 +20,7 @@ export default function SideDishes() {
 
           <div className="menu-grid">
             <div className="card">
-              <img src="cheese.png" alt="Cheese on Tub" />
+              <img src={image1} alt="Cheese on Tub" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
               <div className="card-content">
                 <div className="card-title">CHEESE ON TUB</div>
                 <div className="card-desc">Cheese</div>
@@ -26,7 +29,7 @@ export default function SideDishes() {
             </div>
 
             <div className="card">
-              <img src="fishcake.png" alt="Fishcake on Tub" />
+              <img src={image2} alt="Fishcake on Tub" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
               <div className="card-content">
                 <div className="card-title">FISHCAKE ON TUB</div>
                 <div className="card-desc">Fishcake</div>
@@ -35,7 +38,7 @@ export default function SideDishes() {
             </div>
 
             <div className="card">
-              <img src="eggroll.png" alt="Eggroll on Tub" />
+              <img src={image1} alt="Eggroll on Tub" />
               <div className="card-content">
                 <div className="card-title">EGGROLL ON TUB</div>
                 <div className="card-desc">Eggroll</div>
@@ -44,7 +47,7 @@ export default function SideDishes() {
             </div>
 
             <div className="card">
-              <img src="babypotatoes.png" alt="Baby Potatoes on Tub" />
+              <img src={image2} alt="Baby Potatoes on Tub" />
               <div className="card-content">
                 <div className="card-title">BABY POTATOES ON TUB</div>
                 <div className="card-desc">Baby Potatoes</div>
@@ -53,7 +56,7 @@ export default function SideDishes() {
             </div>
 
             <div className="card">
-              <img src="kimchi.png" alt="Kimchi on Tub" />
+              <img src={image1} alt="Kimchi on Tub" />
               <div className="card-content">
                 <div className="card-title">KIMCHI ON TUB</div>
                 <div className="card-desc">Kimchi</div>

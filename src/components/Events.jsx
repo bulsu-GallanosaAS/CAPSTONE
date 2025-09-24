@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import image7 from '../assets/7.jpg';
+import image8 from '../assets/8.jpg';
 
 export default function Events() {
   return (
@@ -6,21 +8,14 @@ export default function Events() {
       <h2>Sneak peak of our book events</h2>
       <div className="events-carousel">
         <div className="event-image small">
-          <img src="https://via.placeholder.com/200x150/2C3E50/FFFFFF?text=Event+1" alt="Event 1" />
+          <img src={image7} alt="Event 1" />
         </div>
         <div className="event-image large">
-          <img src="https://via.placeholder.com/400x300/34495E/FFFFFF?text=Main+Event+Image" alt="Main Event" />
+          <img src={image8} alt="Main Event" />
         </div>
         <div className="event-image small">
-          <img src="https://via.placeholder.com/200x150/2C3E50/FFFFFF?text=Event+3" alt="Event 3" />
+          <img src={image7} alt="Event 1" />
         </div>
-      </div>
-      <div className="carousel-dots">
-        <span className="dot"></span>
-        <span className="dot active"></span>
-        <span className="dot"></span>
-        <span className="dot"></span>
-        <span className="dot"></span>
       </div>
     </section>
   )

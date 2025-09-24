@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import captureImage from '../assets/Capture.PNG';
 
 export default function Location() {
   return (
@@ -7,7 +8,7 @@ export default function Location() {
       <div className="location-separator"></div>
       <div className="map-container">
         <div className="map-placeholder">
-          <img src="https://via.placeholder.com/800x400/87CEEB/FFFFFF?text=Add+Your+Location+Image+Here" alt="Location" />
+          <img src={captureImage} alt="Location" />
         </div>
       </div>
     </section>

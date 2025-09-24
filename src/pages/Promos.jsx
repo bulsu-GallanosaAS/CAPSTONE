@@ -1,14 +1,17 @@
-import React from 'react'
-import Nav from '../components/Nav.jsx'
-import Footer from '../components/Footer.jsx'
-
+import React from 'react';
+import Nav from '../components/Nav.jsx';
+import Footer from '../components/Footer.jsx';
+import heroImage from '../assets/hero.jpg';
+import promo1Image from '../assets/bday.jpg';
+import promo2Image from '../assets/6.jpg';
+import logo from '../assets/websitelogo.jpg';
 export default function Promos() {
   return (
     <>
       <Nav />
       <main style={{ paddingTop: 90 }}>
         {/* Hero Section */}
-        <section className="hero" style={{ background: "url('hero-bg.jpg') no-repeat center center/cover", height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: 'white', position: 'relative', marginTop: 70 }}>
+        <section className="hero" style={{ background: `url(${heroImage}) no-repeat center center/cover`, height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: 'white', position: 'relative', marginTop: 70 }}>
           <div style={{ content: '', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)' }}></div>
           <div className="hero-content" style={{ position: 'relative', zIndex: 2, maxWidth: '800px', padding: '0 20px' }}>
             <h1 style={{ fontSize: '4rem', fontWeight: 'bold', marginBottom: '20px', lineHeight: '1.1' }}>
@@ -29,9 +32,9 @@ export default function Promos() {
           <div className="promos-grid">
             {/* Birthday Promo */}
             <div className="promo-card">
-              <div className="promo-image" style={{ backgroundImage: "url('birthday-promo.jpg')" }}>
+              <div className="promo-image" style={{ backgroundImage: `url(${promo1Image})` }}>
                 <div className="promo-logo">
-                  <img src="websitelogo.png" alt="SISZUM Gyupsal" />
+                  <img src={logo} alt="SISZUM Gyupsal" style={{ maxWidth: '150px', height: 'auto' }} />
                   <span>SISZUM Gyupsal</span>
                 </div>
               </div>
@@ -45,9 +48,10 @@ export default function Promos() {
 
             {/* Women's Month Promo */}
             <div className="promo-card">
-              <div className="promo-image" style={{ backgroundImage: "url('womens-month-promo.jpg')" }}>
+              <div className="promo-image" style={{ backgroundImage: `url(${promo2Image})` }}>
                 <div className="promo-logo">
-                  <img src="websitelogo.png" alt="SISZUM Gyupsal" />
+                  <img src={logo} alt="SISZUM Gyupsal" style={{ maxWidth: '150px', height: 'auto' }} />
+                  <span>SISZUM Gyupsal</span>
                 </div>
               </div>
               <div className="promo-content">

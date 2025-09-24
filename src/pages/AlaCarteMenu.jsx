@@ -1,6 +1,13 @@
 import React from 'react'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import image1 from '../assets/SAMG PORK ON CUP.jpg'
+import image2 from '../assets/Chicken.jpg'
+import image3 from '../assets/beef.jpg'
+import image4 from '../assets/chicken pop.jpg'
+import image5 from '../assets/korea.jpg'
+import image6 from '../assets/CHICKEN POPPERS.jpg'
+import image7 from '../assets/cheese.jpg'
 
 export default function AlaCarteMenu() {
   return (
@@ -17,7 +24,7 @@ export default function AlaCarteMenu() {
 
         <div className="menu-grid" style={{ display: 'flex', justifyContent: 'center', gap: '40px', padding: '20px 10px 60px 10px', flexWrap: 'wrap' }}>
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/samg-pork-cup.jpg" alt="Samg Pork on Cup" />
+            <img src={image1} alt="Samg Pork on Cup" />
             <div className="card-content">
               <div className="card-title">SAMG PORK ON CUP</div>
               <div className="card-desc">All comes with Lettuce, Eggroll, Fishcake, Kimchi, Cheese, and Rice</div>
@@ -26,7 +33,7 @@ export default function AlaCarteMenu() {
           </div>
 
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/samg-chicken-cup.jpg" alt="Samg Chicken on Cup" />
+            <img src={image2} alt="Samg Chicken on Cup" />
             <div className="card-content">
               <div className="card-title">SAMG CHICKEN ON CUP</div>
               <div className="card-desc">All comes with Lettuce, Eggroll, Fishcake, Kimchi, Cheese, and Rice</div>
@@ -35,7 +42,7 @@ export default function AlaCarteMenu() {
           </div>
 
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/samg-beef-cup.jpg" alt="Samg Beef on Cup" />
+            <img src={image3} alt="Samg Beef on Cup" />
             <div className="card-content">
               <div className="card-title">SAMG BEEF ON CUP</div>
               <div className="card-desc">All comes with Lettuce, Baby Potatoes, Eggroll, Cheese, Fishcake, and Rice</div>
@@ -44,7 +51,7 @@ export default function AlaCarteMenu() {
           </div>
 
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/chicken-poppers-cup.jpg" alt="Chicken Poppers on Cup" />
+            <img src={image4} alt="Chicken Poppers on Cup" />
             <div className="card-content">
               <div className="card-title">CHICKEN POPPERS ON CUP</div>
               <div className="card-desc">All comes with Lettuce, Eggroll, Baby Potatoes, Kimchi, Cheese, and Rice</div>
@@ -53,7 +60,7 @@ export default function AlaCarteMenu() {
           </div>
 
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/korean-meat-cup.jpg" alt="Korean Meat on Cup" />
+            <img src={image5} alt="Korean Meat on Cup" />
             <div className="card-content">
               <div className="card-title">KOREAN MEAT ON CUP</div>
               <div className="card-desc">All comes with Lettuce, Eggroll, Baby Potatoes, Kimchi, Cheese, and Rice</div>
@@ -62,7 +69,7 @@ export default function AlaCarteMenu() {
           </div>
 
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/chicken-poppers.jpg" alt="Chicken Poppers" />
+            <img src={image6} alt="Chicken Poppers" />
             <div className="card-content">
               <div className="card-title">CHICKEN POPPERS</div>
               <div className="card-desc">All comes with Cheese</div>
@@ -71,7 +78,7 @@ export default function AlaCarteMenu() {
           </div>
 
           <div className="card" style={{ width: '320px' }}>
-            <img src="img/cheese.jpg" alt="Cheese" />
+            <img src={image7} alt="Cheese" />
             <div className="card-content">
               <div className="card-title">CHEESE</div>
               <div className="card-desc">1 serve of Cheese</div>

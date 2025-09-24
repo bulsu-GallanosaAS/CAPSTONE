@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import bg from '../assets/bg.jpg'
 
 export default function TimesUp() {
   return (
@@ -11,7 +12,7 @@ export default function TimesUp() {
         <section
           style={{
             position: 'relative',
-            background: "url('https://res.cloudinary.com/the-infatuation/image/upload/c_scale,w_1200,q_auto,f_auto/images/HandamBBQ_C3HandamCombo_RichCasteel_HTX-38_vh8wjb') no-repeat center center/cover",
+            background: `url(${bg}) no-repeat center center/cover`,
             minHeight: '100vh',
             display: 'flex',
             justifyContent: 'center',

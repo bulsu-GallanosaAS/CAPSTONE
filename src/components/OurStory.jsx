@@ -1,9 +1,9 @@
-import React from 'react'
-
+import React from 'react';
+import storyImage from '../assets/1.jpg';
 export default function OurStory() {
   return (
     <section className="our-story">
-      <img src="https://your-our-story-image.com" alt="Restaurant" />
+      <img src={storyImage} alt="Restaurant" />
       <div className="our-story-text">
         <h2>Our Story</h2>
         <p>

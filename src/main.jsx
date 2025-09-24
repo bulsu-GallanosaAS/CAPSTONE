@@ -29,6 +29,7 @@ import ResetPasswordReservation from './pages/ResetPasswordReservation.jsx'
 import ReservationDate from './pages/ReservationDate.jsx'
 import ReservationForm from './pages/ReservationForm.jsx'
 import ReservationUpload from './pages/ReservationUpload.jsx'
+import ReservationConfirmed from './pages/ReservationConfirmed.jsx'
 import './styles.css'
 
 const router = createBrowserRouter([
@@ -68,6 +69,8 @@ const router = createBrowserRouter([
   { path: '/reservationForm', element: <ReservationForm /> },
   { path: '/reservation-upload', element: <ReservationUpload /> },
   { path: '/reservationUpload', element: <ReservationUpload /> },
+  { path: '/reservation-confirmed', element: <ReservationConfirmed /> },
+  { path: '/reservationConfirmed', element: <ReservationConfirmed /> },
 ])
 
 const root = createRoot(document.getElementById('root'))

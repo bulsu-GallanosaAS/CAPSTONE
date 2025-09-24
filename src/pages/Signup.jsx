@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { Link, useNavigate } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
-
+import reservation from '../assets/reservation.jpg'
 export default function Signup() {
   const [formValues, setFormValues] = useState({ name: '', email: '', password: '', agreed: false })
   const [errors, setErrors] = useState({})
@@ -52,7 +52,7 @@ export default function Signup() {
         <section
           style={{
             position: 'relative',
-            background: "url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover",
+            background: `url(${reservation}) no-repeat center center/cover`,
             minHeight: '100vh',
             display: 'flex',
             justifyContent: 'center',

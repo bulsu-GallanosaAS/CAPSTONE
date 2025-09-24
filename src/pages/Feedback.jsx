@@ -2,14 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
-
+import heroImage from '../assets/13.jpg';
+import feedback from '../assets/feedback.jpg';
+import  feedback2 from '../assets/feedback2.jpg';
 export default function Feedback() {
   return (
     <>
       <Nav />
       <main style={{ paddingTop: 90 }}>
         {/* Hero Section */}
-        <section className="hero" style={{ background: "url('hero-bg.jpg') no-repeat center center/cover", height: '60vh', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: 'white', position: 'relative', marginTop: 70 }}>
+        <section className="hero" style={{ background: `url(${heroImage}) no-repeat center center/cover`, height: '60vh', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: 'white', position: 'relative', marginTop: 70 }}>
           <div style={{ content: '', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)' }}></div>
           <div className="hero-content" style={{ position: 'relative', zIndex: 2, maxWidth: '800px', padding: '0 20px' }}>
             <h1 style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '20px', lineHeight: '1.1', color: '#d32f2f' }}>
@@ -49,13 +51,13 @@ export default function Feedback() {
           <h2>WHAT CUSTOMERS SAY</h2>
           <div className="reviews-grid">
             <div className="review-card">
-              <div className="review-image" style={{ backgroundImage: "url('review1.jpg')" }}></div>
+              <div className="review-image" style={{ backgroundImage: `url(${feedback})` }}></div>
               <div className="review-content">
                 <div className="review-header">
                   <div className="profile-pic" style={{ backgroundImage: "url('profile1.jpg')" }}></div>
                   <div className="review-info">
                     <h4>Sarah Johnson</h4>
-                    <div className="stars">⭐⭐⭐</div>
+                    <div className="stars">⭐⭐⭐⭐⭐</div>
                   </div>
                 </div>
                 <p className="review-text">Best samgy house and side dishes in town!!! Specially the newest addition in their side dishes, FISH CAKE! OA sa SaRaaAap!!! Must try!!!</p>
@@ -63,13 +65,13 @@ export default function Feedback() {
             </div>
 
             <div className="review-card">
-              <div className="review-image" style={{ backgroundImage: "url('review2.jpg')" }}></div>
+              <div className="review-image" style={{ backgroundImage: `url(${feedback2})` }}></div>
               <div className="review-content">
                 <div className="review-header">
                   <div className="profile-pic" style={{ backgroundImage: "url('profile2.jpg')" }}></div>
                   <div className="review-info">
                     <h4>Mike Rodriguez</h4>
-                    <div className="stars">⭐⭐⭐</div>
+                    <div className="stars">⭐⭐⭐⭐⭐</div>
                   </div>
                 </div>
                 <p className="review-text">Their samgyupsal and side dish are so good, yet AFFORDABLE. Worth it ang long drive.</p>

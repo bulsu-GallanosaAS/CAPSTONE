@@ -1,8 +1,27 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createRefillRequest, getTableTimer, isPosConfigured } from '../api/pos.js'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import bg from '../assets/bg.jpg'
+import siomaiImg from '../assets/Siomai.png'
+import sausageImg from '../assets/Sausage.png'
+import cucumberImg from '../assets/Cucumber.png'
+import beanSproutsImg from '../assets/Bean Sprouts.png'
+import kimchiImg from '../assets/Kimchi.png'
+import fishcakeImg from '../assets/Fishcake.png'
+import eggrollImg from '../assets/Eggroll.png'
+import babyPotatoesImg from '../assets/Baby Potatoes.png'
+import porkImg from '../assets/Pork.png'
+import beefImg from '../assets/Beef.png'
+import chickenImg from '../assets/Chicken.png'
+import premiumPorkImg from '../assets/Premium Pork.png'
+import premiumChickenImg from '../assets/Premium Chicken.png'
+import riceImg from '../assets/Rice.png'
+import lettuceImg from '../assets/Lettuce.png'
+import cheeseImg from '../assets/Cheese.png'
+import drinksImg from '../assets/Drinks.png'
+
 
 function Counter({ value, onChange }) {
   function dec() { onChange(Math.max(0, value - 1)) }
@@ -51,20 +70,27 @@ export default function RefillRequest() {
   const [food, setFood] = useState({})
 
   const sideItems = [
-    { name: 'Kimchi', img: 'https://png.pngtree.com/thumb_back/fw800/background/20230818/pngtree-korean-kimchi-is-a-steamed-dish-made-with-sesame-oil-image_12985563.jpg' },
-    { name: 'Fishcake', img: 'https://seasonedbyjin.com/wp-content/uploads/2022/05/fish-cake-stir-fry.jpg' },
-    { name: 'Eggroll', img: 'https://kimchimari.com/wp-content/uploads/2020/01/korean-egg-roll-gyeranmari.jpg' },
-    { name: 'Corncheese', img: 'https://tse4.mm.bing.net/th/id/OIP.iT5ICulvvXbX7NTajdkrMAHaJ4?r=0&rs=1&pid=ImgDetMain&o=7&rm=3' }
+    { name: 'Siomai', img: siomaiImg },
+    { name: 'Hotdog', img: sausageImg },
+    { name: 'Cucumber', img: cucumberImg },
+    { name: 'Bean Sprouts', img: beanSproutsImg },
+    { name: 'Kimchi', img: kimchiImg },
+    { name: 'Fishcake', img: fishcakeImg },
+    { name: 'Eggroll', img: eggrollImg },
+    { name: 'Baby Potatoes', img: babyPotatoesImg }
   ]
   const meatItems = [
-    { name: 'Pork', img: 'https://www.tenderbites.ph/media/catalog/product/cache/6658c6986eb36f9bee022e602f6cd310/s/a/samkyupsal_1_s.jpg' },
-    { name: 'Beef', img: 'https://baycatch.ph/cdn/shop/files/beef-samgyupsal-sku.jpg?v=1698145108&width=1946' },
-    { name: 'Bacon', img: 'https://c.pxhere.com/photos/dd/35/Meat_Meats-1621745.jpg!d' }
+    { name: 'Pork', img: porkImg },
+    { name: 'Beef', img: beefImg },
+    { name: 'Chicken', img: chickenImg },
+    { name: 'Premium Pork', img: premiumPorkImg },
+    { name: 'Premium Chicken', img: premiumChickenImg }
   ]
   const foodItems = [
-    { name: 'Rice', img: 'https://ohmyfacts.com/wp-content/uploads/2024/06/45-rice-nutrition-facts-1717912224.jpeg' },
-    { name: 'Lettuce', img: 'https://www.100daysofrealfood.com/wp-content/uploads/2023/11/vecteezy_lettuce-salad-leaf-isolated-on-white-background-with_5582269-scaled.jpg' },
-    { name: 'Cheese', img: 'https://www.arapatria.com/wp-content/uploads/2019/03/LRM_EXPORT_196177051183705_20190320_150732741-scaled.jpeg' }
+    { name: 'Rice', img: riceImg },
+    { name: 'Lettuce', img: lettuceImg },
+    { name: 'Cheese', img: cheeseImg },
+    { name: 'Drinks', img: drinksImg }
   ]
 
   function mmss(totalSeconds) {
@@ -72,6 +98,8 @@ export default function RefillRequest() {
     const s = Math.floor(totalSeconds % 60).toString().padStart(2, '0')
     return `${m}:${s}`
   }
+
+  const navigate = useNavigate();
 
   // Initialize countdown based on admin-configured duration
   useEffect(() => {
@@ -99,15 +127,19 @@ export default function RefillRequest() {
       const remain = Math.max(0, Math.floor((deadline - Date.now()) / 1000))
       setRemainingSec(remain)
       setMeta((m) => ({ ...m, time: mmss(remain), status: remain === 0 ? 'Time\'s up' : 'On-going' }))
+      
       if (remain === 0) {
         // Clear deadline when finished
         localStorage.removeItem('refillDeadlineMs')
+        // Redirect to TimesUp page
+        navigate('/timesup')
       }
     }
+    
     tick()
     const id = setInterval(tick, 1000)
     return () => clearInterval(id)
-  }, [])
+  }, [navigate])
 
   // Initialize admin-controlled meta fields (table code/number/status)
   useEffect(() => {
@@ -180,7 +212,7 @@ export default function RefillRequest() {
         <section
           style={{
             position: 'relative',
-            background: "url('https://res.cloudinary.com/the-infatuation/image/upload/c_scale,w_1200,q_auto,f_auto/images/HandamBBQ_C3HandamCombo_RichardCasteel_HTX-38_vh8wjb') no-repeat center center/cover",
+            background: `url(${bg}) no-repeat center center/cover`,
             minHeight: '100vh',
             display: 'flex',
             justifyContent: 'center',

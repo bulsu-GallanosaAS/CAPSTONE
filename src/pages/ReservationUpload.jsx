@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Nav from "../components/Nav.jsx";
 import Footer from "../components/Footer.jsx";
+import reservation from "../assets/reservation.jpg";
+import gcash from "../assets/gcash.png"; 
 
 export default function ReservationUpload() {
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -61,7 +63,7 @@ export default function ReservationUpload() {
 
       setTimeout(() => {
         setIsUploading(false);
-        navigate("/reservation-confirmation", {
+        navigate("/reservation-confirmed", {
           state: {
             ...reservationData,
             phoneNumber,
@@ -80,7 +82,7 @@ export default function ReservationUpload() {
         <section
           style={{
             background:
-              "url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop') no-repeat center/cover",
+              `url(${reservation}) no-repeat center/cover`,
             minHeight: "100vh",
             display: "flex",
             justifyContent: "center",
@@ -149,30 +151,93 @@ export default function ReservationUpload() {
                   marginBottom: "24px",
                 }}
               >
-                <div style={{ textAlign: "center", marginBottom: "20px" }}>
-                  <img
-                    src="/gcash-qr.png" // Replace with your real QR code
-                    alt="GCash QR"
-                    style={{
-                      width: "200px",
-                      height: "200px",
-                      borderRadius: "12px",
-                      marginBottom: "10px",
-                    }}
-                  />
-                  <button
-                    style={{
+                <div style={{ 
+                  textAlign: "center",
+                  marginBottom: "20px",
+                  position: "relative"
+                }}>
+                  <div style={{
+                    position: "relative",
+                    display: "inline-block",
+                    padding: "16px",
+                    background: "#fff",
+                    borderRadius: "16px",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                    marginBottom: "20px"
+                  }}>
+                    <img
+                      src={gcash}
+                      alt="GCash QR"
+                      style={{
+                        width: "180px",
+                        height: "180px",
+                        borderRadius: "8px",
+                        border: "1px solid #f0f0f0"
+                      }}
+                    />
+                    <div style={{
+                      position: "absolute",
+                      top: "-8px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
                       background: "#dc2626",
-                      color: "#fff",
-                      border: "none",
-                      padding: "8px 16px",
-                      borderRadius: "6px",
+                      color: "white",
                       fontSize: "12px",
                       fontWeight: 600,
+                      padding: "4px 16px",
+                      borderRadius: "20px",
+                      whiteSpace: "nowrap",
+                      boxShadow: "0 2px 8px rgba(220, 38, 38, 0.3)"
+                    }}>
+                      DOWN PAYMENT: ₱100.00
+                    </div>
+                  </div>
+                  
+                  <button
+                    style={{
+                      background: "linear-gradient(135deg, #dc2626, #b91c1c)",
+                      color: "#fff",
+                      border: "none",
+                      padding: "12px 32px",
+                      borderRadius: "30px",
+                      fontSize: "14px",
+                      fontWeight: 600,
                       cursor: "pointer",
+                      boxShadow: "0 4px 12px rgba(220, 38, 38, 0.25)",
+                      position: "relative",
+                      overflow: "hidden",
+                      transition: "all 0.3s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      margin: "0 auto"
+                    }}
+                    onMouseOver={e => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = "0 6px 16px rgba(220, 38, 38, 0.35)";
+                      e.currentTarget.querySelector('.scan-shine').style.transform = 'translateX(100%) rotate(15deg)';
+                    }}
+                    onMouseOut={e => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 4px 12px rgba(220, 38, 38, 0.25)";
+                      e.currentTarget.querySelector('.scan-shine').style.transform = 'translateX(-100%) rotate(15deg)';
                     }}
                   >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C15.73 20 18.84 17.45 19.73 14H17.65C16.83 16.33 14.61 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.14 6.69 16.22 7.78L13 11H20V4L17.65 6.35Z" fill="currentColor"/>
+                    </svg>
                     SCAN ME
+                    <span className="scan-shine" style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      background: 'rgba(255,255,255,0.2)',
+                      transform: 'translateX(-100%) rotate(15deg)',
+                      transition: 'transform 0.6s ease',
+                      pointerEvents: 'none'
+                    }}></span>
                   </button>
                 </div>
                 <p

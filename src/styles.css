@@ -12,7 +12,14 @@ nav {
   padding: 15px 50px; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   position: fixed; top: 0; width: 100%; z-index: 100;
 }
-nav .logo img { height: 50px; }
+nav .logo img { 
+  height: 60px; 
+  width: 120px; 
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 nav ul { display: flex; list-style: none; }
 nav ul li { margin: 0 15px; }
 nav ul li a { text-decoration: none; color: #000; font-weight: bold; transition: 0.3s; }
@@ -29,7 +36,7 @@ nav ul li.has-dropdown > a::after { content: '▾'; margin-left: 6px; font-size:
 nav ul li.has-dropdown:hover .dropdown { display: block; }
 
 .hero {
-  background: url('https://res.cloudinary.com/the-infatuation/image/upload/c_scale,w_1200,q_auto,f_auto/images/HandamBBQ_C3HandamCombo_RichardCasteel_HTX-38_vh8wjb') no-repeat center center/cover;
+  background: url('./assets/hero.jpg') no-repeat center center/cover;
   height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center;
   color: white; position: relative; margin-top: 70px; overflow: hidden;
   background-attachment: fixed;

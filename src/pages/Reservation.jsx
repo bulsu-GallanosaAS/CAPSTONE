@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import reservation from '../assets/reservation.jpg'
 
 export default function Reservation() {
   return (
@@ -9,7 +10,7 @@ export default function Reservation() {
       <Nav />
       <section className="reservation-hero">
         <div className="reservation-hero__frame">
-          <img className="reservation-hero__bg" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2400&auto=format&fit=crop" alt="Restaurant" />
+          <img className="reservation-hero__bg" src={reservation} alt="Restaurant" />
           <div className="reservation-hero__overlay" />
           <div className="reservation-hero__content">
             <h1 className="reservation-hero__title">SISZUMGYUPSAL RESTAURANT<br />RESERVATION</h1>

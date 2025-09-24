@@ -1,13 +1,12 @@
 import React from 'react'
-
+import logo from '../assets/blacklogo.jpg'
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
         <div className="brand">
           <div className="logo">
-            <img src="/websitelogo.png" alt="SISZUMgyupsal Logo" />
-            <span>SISZUMgyupsal</span>
+            <img src={logo} alt="SISZUMgyupsal Logo" />
           </div>
           <p>
             At SISZUMgyupsal, we believe every meal should be delicious, memorable, and

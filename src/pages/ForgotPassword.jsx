@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import bg from '../assets/bg2.png'
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('')
@@ -26,7 +27,7 @@ export default function ForgotPassword() {
         <section
           style={{
             position: 'relative',
-            background: "url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover",
+            background: `url(${bg}) no-repeat center center/cover`,
             minHeight: '100vh',
             display: 'flex',
             justifyContent: 'center',

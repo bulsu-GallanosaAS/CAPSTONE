@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
+import bg from '../assets/bg2.png'
 
 export default function SuccessNewPassword() {
   return (
@@ -11,7 +12,7 @@ export default function SuccessNewPassword() {
         <section
           style={{
             position: 'relative',
-            background: "url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover",
+            background: `url(${bg}) no-repeat center center/cover`,
             minHeight: '100vh',
             display: 'flex',
             justifyContent: 'center',
