@@ -8,6 +8,7 @@ import Login from './pages/Login.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 import SuccessNewPassword from './pages/SuccessNewPassword.jsx'
+import SuccessNewPasswordReservation from './pages/SuccessNewPasswordReservation.jsx'
 import FeedbackForm from './pages/FeedbackForm.jsx'
 import FeedbackSubmitted from './pages/FeedbackSubmitted.jsx'
 import Refilling from './pages/Refilling.jsx'
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
   { path: '/forgot', element: <ForgotPassword /> },
   { path: '/reset', element: <ResetPassword /> },
   { path: '/reset-success', element: <SuccessNewPassword /> },
+  { path: '/success-new-password-reservation', element: <SuccessNewPasswordReservation /> },
   { path: '/feedback-form', element: <FeedbackForm /> },
   { path: '/feedback-submitted', element: <FeedbackSubmitted /> },
   { path: '/refilling', element: <Refilling /> },

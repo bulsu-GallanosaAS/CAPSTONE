@@ -30,7 +30,7 @@ export default function ResetPasswordReservation() {
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length === 0) {
       console.log('Password reset:', formValues)
-      navigate('/login-reservation')
+      navigate('/success-new-password-reservation')
     }
   }
 
