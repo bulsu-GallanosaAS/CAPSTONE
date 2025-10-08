@@ -1,9 +1,0 @@
-[build]
-builder = "NIXPACKS"
-buildCommand = "cd server && npm install && npm run build"
-
-[start]
-startCommand = "cd server && npm start"
-
-[env]
-NODE_VERSION = "18"
