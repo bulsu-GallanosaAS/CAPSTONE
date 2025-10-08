@@ -210,7 +210,15 @@ router.post('/login', async (req, res) => {
         }
         const customer = customers[0];
         // Check if password is correct
-        const isPasswordValid = await bcryptjs_1.default.compare(password, customer.password_hash);
+        // Handle both password and password_hash columns for backward compatibility
+        const storedPassword = customer.password || customer.password_hash;
+        if (!storedPassword) {
+            return res.status(401).json({
+                success: false,
+                message: 'No password set for this account. Please reset your password.'
+            });
+        }
+        const isPasswordValid = await bcryptjs_1.default.compare(password, storedPassword);
         if (!isPasswordValid) {
             return res.status(401).json({
                 success: false,
@@ -456,6 +464,155 @@ router.get('/stats/overview', auth_1.authenticateToken, async (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Failed to fetch customer statistics',
+            error: error.message
+        });
+    }
+});
+// Customer registration
+router.post('/register', async (req, res) => {
+    try {
+        const { first_name, last_name, email, password, phone, address } = req.body;
+        console.log('Registration request for email:', email);
+        // Validate input
+        if (!email || !password || !first_name || !last_name) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email, password, first name, and last name are required'
+            });
+        }
+        if (password.length < 6) {
+            return res.status(400).json({
+                success: false,
+                message: 'Password must be at least 6 characters long'
+            });
+        }
+        // Check if customer already exists
+        const checkQuery = 'SELECT id FROM customers WHERE email = ?';
+        const [existingCustomer] = await database_1.pool.execute(checkQuery, [email]);
+        if (existingCustomer.length > 0) {
+            return res.status(409).json({
+                success: false,
+                message: 'Customer with this email already exists'
+            });
+        }
+        // Hash the password
+        const saltRounds = 10;
+        const hashedPassword = await bcryptjs_1.default.hash(password, saltRounds);
+        // Ensure address column exists
+        try {
+            await database_1.pool.execute('ALTER TABLE customers ADD COLUMN address TEXT DEFAULT NULL');
+            console.log('Address column added to customers table');
+        }
+        catch (alterError) {
+            // Column might already exist, ignore duplicate column error
+            if (alterError.code !== 'ER_DUP_FIELDNAME') {
+                console.log('Error adding address column:', alterError.message);
+            }
+        }
+        // Generate customer code
+        const customerCode = `CUST${Date.now()}`;
+        // Insert new customer
+        const insertQuery = `
+      INSERT INTO customers (customer_code, first_name, last_name, email, password, phone, address, is_active, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW())
+    `;
+        const [result] = await database_1.pool.execute(insertQuery, [
+            customerCode,
+            first_name,
+            last_name,
+            email,
+            hashedPassword,
+            phone || null,
+            address || null
+        ]);
+        console.log('Customer registration successful for email:', email);
+        const response = {
+            success: true,
+            message: 'Customer registered successfully',
+            data: {
+                id: result.insertId,
+                customer_code: customerCode,
+                email: email
+            }
+        };
+        res.status(201).json(response);
+    }
+    catch (error) {
+        console.error('Error registering customer:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to register customer',
+            error: error.message
+        });
+    }
+});
+// Reset customer password
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { email, currentPassword, newPassword } = req.body;
+        console.log('Password reset request for email:', email);
+        // Validate input
+        if (!email || !currentPassword || !newPassword) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email, current password, and new password are required'
+            });
+        }
+        // First, ensure password column exists
+        try {
+            await database_1.pool.execute('ALTER TABLE customers ADD COLUMN password VARCHAR(255) DEFAULT NULL');
+            console.log('Password column added to customers table');
+        }
+        catch (alterError) {
+            // Column might already exist, ignore duplicate column error
+            if (alterError.code !== 'ER_DUP_FIELDNAME') {
+                console.log('Error adding password column:', alterError.message);
+            }
+        }
+        // Check if customer exists and get current password
+        const checkQuery = 'SELECT id, password, password_hash FROM customers WHERE email = ?';
+        const [customerResult] = await database_1.pool.execute(checkQuery, [email]);
+        if (customerResult.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Customer not found with this email'
+            });
+        }
+        const customer = customerResult[0];
+        // Verify current password
+        const storedPassword = customer.password || customer.password_hash;
+        if (!storedPassword) {
+            return res.status(400).json({
+                success: false,
+                message: 'No password set for this account. Please contact support.'
+            });
+        }
+        const isCurrentPasswordValid = await bcryptjs_1.default.compare(currentPassword, storedPassword);
+        if (!isCurrentPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: 'Current password is incorrect'
+            });
+        }
+        // Hash the new password
+        const saltRounds = 10;
+        const hashedPassword = await bcryptjs_1.default.hash(newPassword, saltRounds);
+        // Update password in database
+        const updateQuery = 'UPDATE customers SET password = ?, updated_at = NOW() WHERE id = ?';
+        await database_1.pool.execute(updateQuery, [hashedPassword, customer.id]);
+        console.log('Password reset successful for email:', email);
+        const response = {
+            success: true,
+            message: 'Password reset successfully',
+            data: null
+        };
+        res.json(response);
+    }
+    catch (error) {
+        console.error('Error resetting password:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to reset password',
             error: error.message
         });
     }

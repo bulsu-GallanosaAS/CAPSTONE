@@ -292,52 +292,36 @@ router.get('/fully-booked-dates', async (req, res) => {
                 message: 'Year and month are required'
             });
         }
-        const monthNumber = Number(month);
-        const yearNumber = Number(year);
-        // Get total number of active tables once
+        // Get total number of tables
         const allTables = await (0, database_1.executeQuery)('SELECT COUNT(*) as total FROM restaurant_tables');
-        const totalTables = allTables[0]?.total ?? 0;
-        if (totalTables === 0) {
-            return res.json({
-                success: true,
-                message: 'No tables configured',
-                data: []
-            });
-        }
-        const timeSlots = ['17:00', '18:30', '20:00'];
-        const paddedMonth = String(monthNumber).padStart(2, '0');
-        const daysInMonth = new Date(yearNumber, monthNumber, 0).getDate();
-        const startDate = `${year}-${paddedMonth}-01`;
-        const endDate = `${year}-${paddedMonth}-${String(daysInMonth).padStart(2, '0')}`;
-        const reservations = await (0, database_1.executeQuery)(`
-      SELECT 
-        reservation_date,
-        DATE_FORMAT(reservation_time, '%H:%i') AS time_slot,
-        COUNT(DISTINCT table_id) AS reserved_count
-      FROM reservations
-      WHERE reservation_date BETWEEN ? AND ?
-        AND status IN ('pending', 'confirmed')
-      GROUP BY reservation_date, time_slot
-    `, [startDate, endDate]);
-        const reservationMap = new Map();
-        for (const entry of reservations) {
-            const date = entry.reservation_date;
-            const timeSlot = entry.time_slot;
-            const count = Number(entry.reserved_count) || 0;
-            if (!reservationMap.has(date)) {
-                reservationMap.set(date, new Map());
-            }
-            reservationMap.get(date).set(timeSlot, count);
-        }
+        const totalTables = allTables[0].total;
+        // Get all time slots (you can customize this based on your business hours)
+        const timeSlots = ['17:00', '18:30', '20:00']; // 5:00 PM, 6:30 PM, 8:00 PM
+        // Get all dates in the month that have reservations
+        const startDate = `${year}-${String(month).padStart(2, '0')}-01`;
+        const endDate = `${year}-${String(month).padStart(2, '0')}-31`;
         const fullyBookedDates = [];
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dateStr = `${year}-${paddedMonth}-${String(day).padStart(2, '0')}`;
-            const timeSlotMap = reservationMap.get(dateStr);
-            const allBooked = timeSlots.every((slot) => {
-                const bookedCount = timeSlotMap?.get(slot) ?? 0;
-                return bookedCount >= totalTables;
-            });
-            if (allBooked) {
+        // Check each day of the month
+        for (let day = 1; day <= 31; day++) {
+            const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            let allSlotsBooked = true;
+            // Check each time slot
+            for (const timeSlot of timeSlots) {
+                const reservedTables = await (0, database_1.executeQuery)(`
+          SELECT COUNT(DISTINCT table_id) as reserved_count
+          FROM reservations
+          WHERE reservation_date = ?
+          AND TIME_FORMAT(reservation_time, '%H:%i') = ?
+          AND status IN ('pending', 'confirmed')
+        `, [dateStr, timeSlot]);
+                const reservedCount = reservedTables[0].reserved_count;
+                // If any time slot has available tables, the date is not fully booked
+                if (reservedCount < totalTables) {
+                    allSlotsBooked = false;
+                    break;
+                }
+            }
+            if (allSlotsBooked) {
                 fullyBookedDates.push(dateStr);
             }
         }
