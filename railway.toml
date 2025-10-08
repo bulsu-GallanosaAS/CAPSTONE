@@ -1,7 +1,0 @@
-[build]
-builder = "NIXPACKS"
-buildCommand = "cd server && npm install && npm run build"
-buildImage = "ghcr.io/railwayapp/nixpacks:node-18"
-
-[start]
-startCommand = "cd server && npm start"
